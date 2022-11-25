@@ -1,15 +1,14 @@
-function evaluateSum() {
-  document.getElementById("display").innerHTML = display();
-}
-function clearSum() {
-  document.getElementById("display").innerHTML = display();
-  document.getElementById("display1").innerHTML = display1();
-}
+// function evaluateSum() {
+//   document.getElementById("display").innerHTML = display();
+// }
+// function clearSum() {
+//   document.getElementById("display").innerHTML = display();
+//   document.getElementById("display1").innerHTML = display1();
+// }
 
 var erase = document.querySelector("#del");
 var clear = document.querySelector("#clear");
 var equal = document.querySelector("#equal");
-
 var btn_0 = document.querySelector("#zero");
 var btn_1 = document.querySelector("#one");
 var btn_2 = document.querySelector("#two");
@@ -20,13 +19,11 @@ var btn_6 = document.querySelector("#six");
 var btn_7 = document.querySelector("#seven");
 var btn_8 = document.querySelector("#eight");
 var btn_9 = document.querySelector("#nine");
-
 var btn_plus = document.querySelector("#plus");
 var btn_min = document.querySelector("#min");
 var btn_mul = document.querySelector("#mul");
 var btn_divide = document.querySelector("#divide");
 var btn_point = document.querySelector("#point");
-
 var write_me = document.querySelector("#display");
 var result = document.querySelector("#display1");
 
@@ -78,7 +75,9 @@ btn_point.onclick = () => {
 clear.onclick = () => {
   clearSum();
 };
-
+erase.onclick = () => {
+  erase_screan();
+};
 equal.onclick = () => {
   evaluateSum();
 };
@@ -116,8 +115,10 @@ document.onkeyup = (e) => {
     type_to(".");
   } else if (e.key == "Enter" || e.key == "Numenter") {
     evaluateSum();
-  }else if (e.key == "Delete") {
+  } else if (e.key == "Delete") {
     clearSum();
+  } else if (e.key == "Backspace" || e.key == "Escape") {
+    erase_screan();
   }
 };
 
@@ -130,11 +131,20 @@ var type_to = (text) => {
     alert("Digit limit reached");
   }
 };
-
 var evaluateSum = () => {
   var res = write_me.innerText;
   if (res.indexOf("X") != -1) {
     res = res.replace("X", "*");
-  } 
+  }
   result.innerText = eval(write_me.innerText);
+};
+var clearSum = () => {
+  write_me.innerText = "";
+  result.innerText = "";
+};
+var erase_screan = () => {
+  write_me.innerText = write_me.innerText.substr(
+    0,
+    write_me.innerText.length - 1
+  );
 };
